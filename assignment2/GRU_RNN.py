@@ -244,7 +244,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
       input = embedding
       for h_index in range(self.num_layers):
         # Recurrent GRU cell
-        h_recurrent = self.GRU_cells[h_index].forward(input,h_previous_ts[h_index])
+        h_recurrent = self.GRU_cells[h_index].forward(input, h_previous_ts[h_index])
         # Fully connected layer with dropout
         h_previous_layer = self.dropout(h_recurrent)
         input = h_previous_layer # used vertically up the layers
