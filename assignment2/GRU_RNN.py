@@ -92,7 +92,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
   Follow the same instructions as for RNN (above), but use the equations for
   GRU, not Vanilla RNN.
   """
-  def __init__(self, emb_size, hidden_size, seq_len, batch_size, vocab_size, num_layers, dp_keep_prob=0.2):
+  def __init__(self, emb_size, hidden_size, seq_len, batch_size, vocab_size, num_layers, dp_keep_prob):
     """
     emb_size:     The number of units in the input embeddings
     hidden_size:  The number of hidden units per layer
@@ -111,14 +111,16 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     self.batch_size = batch_size
     self.vocab_size = vocab_size
     self.num_layers = num_layers
-    self.drop_prob = 1 - dp_keep_prob
 
-    self.embedding = nn.Embedding(self.vocab_size, self.emb_size)
-    self.decode = nn.Linear(hidden_size,vocab_size)
+    self.embedding = nn.Embedding(vocab_size, emb_size)
+    self.decode = nn.Linear(hidden_size, vocab_size)
 
-    self.fc = clones(nn.Linear(hidden_size, hidden_size), num_layers)
-    self.dropout = clones(nn.Dropout(self.drop_prob), num_layers)
+    self.dropout = nn.Dropout(1 - dp_keep_prob)
     self.softmax = nn.Softmax(dim=2)
+
+    # Weight initialization (Embedding has no bias)
+    self.init_weights_uniform(self.embedding, init_bias=False)
+    self.init_weights_uniform(self.decode, init_bias=True)
 
     self.GRU_cells = nn.ModuleList([GRU_cell(emb_size if i == 0 else hidden_size, hidden_size) for i in range(num_layers)])
 
@@ -136,7 +138,16 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     # and compute their gradients automatically. You're not obligated to use the
     # provided clones function.
 
-  def init_hidden(self): #called in main in the epoch loop
+  def init_weights_uniform(self, layer, init_bias=False):
+    """
+    Initialize all the weights uniformly in the range [-0.1, 0.1]
+    and all the biases to 0 (in place)
+    """
+    torch.nn.init.uniform_(layer.weight, a=-0.1, b=0.1)
+    if init_bias:
+        torch.nn.init.constant_(layer.bias, 0)
+
+  def init_hidden(self):
     # initialize the hidden states to zero
     """
     This is used for the first mini-batch in an epoch, only.
@@ -183,14 +194,12 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     embeddings = self.embedding(inputs)
     for t in range(self.seq_len):
       h_next_ts = []
-      # TODO
-      # change dropout
-      input = self.dropout[0](embeddings[t])
+      input = self.dropout(embeddings[t])
       for h_index in range(self.num_layers):
         # Recurrent GRU cell
-        h_recurrent = self.GRU_cells[h_index].forward(input,h_previous_ts[h_index])
+        h_recurrent = self.GRU_cells[h_index].forward(input, h_previous_ts[h_index])
         # Fully connected layer with dropout
-        h_previous_layer = self.dropout[h_index](self.fc[h_index](h_recurrent))
+        h_previous_layer = self.dropout(h_recurrent)
         input = h_previous_layer # used vertically up the layers
         # Keep the ref for next ts
         h_next_ts.append(h_recurrent) # used horizontally across timesteps
@@ -237,7 +246,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
         # Recurrent GRU cell
         h_recurrent = self.GRU_cells[h_index].forward(input,h_previous_ts[h_index])
         # Fully connected layer with dropout
-        h_previous_layer = self.dropout[h_index](self.fc[h_index](h_recurrent))
+        h_previous_layer = self.dropout(h_recurrent)
         input = h_previous_layer # used vertically up the layers
         # Keep the ref for next ts
         h_next_ts.append(h_recurrent) # used horizontally across timesteps
