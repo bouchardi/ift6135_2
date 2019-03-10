@@ -207,7 +207,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
       logits.append(self.decode(h_previous_layer))
     return torch.stack(logits), h_next_ts
 
-  def generate(self, input, hidden, generated_seq_len): #generate next work using the GRU
+  def generate(self, input, hidden, generated_seq_len): #generate next word using the GRU
     # Compute the forward pass, as in the self.forward method (above).
     # You'll probably want to copy substantial portions of that code here.
     #
