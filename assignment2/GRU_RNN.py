@@ -115,7 +115,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     self.embedding = nn.Embedding(vocab_size, emb_size)
     self.decode = nn.Linear(hidden_size, vocab_size)
 
-    self.dropout = nn.Dropout(1 - dp_keep_prob)
+    self.dropout = clones(nn.Dropout(1 - dp_keep_prob),num_layers)
     self.softmax = nn.Softmax(dim=2)
 
     # Weight initialization (Embedding has no bias)
@@ -194,12 +194,12 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     embeddings = self.embedding(inputs)
     for t in range(self.seq_len):
       h_next_ts = []
-      input = self.dropout(embeddings[t])
+      input = self.dropout[0](embeddings[t])
       for h_index in range(self.num_layers):
         # Recurrent GRU cell
         h_recurrent = self.GRU_cells[h_index].forward(input, h_previous_ts[h_index])
         # Fully connected layer with dropout
-        h_previous_layer = self.dropout(h_recurrent)
+        h_previous_layer = self.dropout[h_index](h_recurrent)
         input = h_previous_layer # used vertically up the layers
         # Keep the ref for next ts
         h_next_ts.append(h_recurrent) # used horizontally across timesteps
