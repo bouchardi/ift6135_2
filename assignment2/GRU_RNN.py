@@ -54,11 +54,11 @@ class GRU_cell(nn.Module): # Implement a stacked GRU RNN
     self.tanh = nn.Tanh()
 
   def init_weights_uniform(self):
-    # Initialize all the weights uniformly in the range [-0.1, 0.1]
-    # and all the biases to 0 (in place)
-    stdv = 0.1
+    # Initialize all other (i.e. recurrent and linear) weights AND biases uniformly
+    # in the range [-k, k] where k is the square root of 1/hidden_size
+    k = math.sqrt(1.0/self.hidden_size)
     for weight in self.parameters():
-      weight.data.uniform_(-stdv, stdv)
+      weight.data.uniform_(-k, k)
 
     torch.nn.init.zeros_(self.bias_rzh)
 
@@ -140,8 +140,8 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
 
   def init_weights_uniform(self, layer, init_bias=False):
     """
-    Initialize all the weights uniformly in the range [-0.1, 0.1]
-    and all the biases to 0 (in place)
+    # Initialize the embedding and output weights uniformly in the range [-0.1, 0.1]
+    # and output biases to 0 (in place). The embeddings should not use a bias vector.
     """
     torch.nn.init.uniform_(layer.weight, a=-0.1, b=0.1)
     if init_bias:
