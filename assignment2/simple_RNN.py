@@ -63,9 +63,10 @@ class RNN(nn.Module): # Implement a stacked vanilla RNN with Tanh nonlinearities
     linear_W = [nn.Linear(hidden_size, hidden_size) for _ in range(num_layers - 1)]
     for layer in linear_W:
         self.init_weights_uniform_0(layer)
-    self.linear_W = nn.ModuleList(linear_W)
-    self.init_weights_uniform_0(nn.Linear(hidden_size, hidden_size))
-    self.linear_U = clones(, num_layers)
+    self.linear_W = nn.ModuleList([linear_W0] + linear_W)
+    linear_U = nn.Linear(hidden_size, hidden_size)
+    self.init_weights_uniform_0(linear_U)
+    self.linear_U = clones(linear_U, num_layers)
 
     # Embedding decoder
     self.decode = nn.Linear(hidden_size, vocab_size)
@@ -87,7 +88,7 @@ class RNN(nn.Module): # Implement a stacked vanilla RNN with Tanh nonlinearities
     if init_bias:
         torch.nn.init.constant_(layer.bias, 0)
 
-  def init_weights_uniform_0(self, layer):
+  def init_weights_uniform_0(self, layer, init_bias=True):
     # Initialize all other (i.e. recurrent and linear) weights AND biases uniformly
     # in the range [-k, k] where k is the square root of 1/hidden_size
     k = math.sqrt(1.0/self.hidden_size)

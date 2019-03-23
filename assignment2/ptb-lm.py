@@ -50,7 +50,7 @@
 #                  RNN: train:  120  val: 157
 #                  GRU: train:   65  val: 104
 #          TRANSFORMER:  train:  67  val: 146
-#    - For Problem 4.2 (exploration of optimizers), you will make use of the 
+#    - For Problem 4.2 (exploration of optimizers), you will make use of the
 #      experiments from 4.1, and should additionally run the following experiments:
 #          --model=RNN --optimizer=SGD --initial_lr=0.0001 --batch_size=20 --seq_len=35 --hidden_size=1500 --num_layers=2 --dp_keep_prob=0.35
 #          --model=GRU --optimizer=SGD --initial_lr=10 --batch_size=20 --seq_len=35 --hidden_size=1500 --num_layers=2 --dp_keep_prob=0.35
@@ -424,7 +424,7 @@ def run_epoch(model, data, is_train=False, lr=1.0, id_2_word=None):
                 print('step: '+ str(step) + '\t' \
                     + 'loss: '+ str(costs/step) + '\t' \
                     + 'speed (wps):' + str(iters * model.batch_size / (time.time() - start_time)))
-                print_example(targets, outputs, id_2_word, is_train)
+                #print_example(targets, outputs, id_2_word, is_train)
     return np.exp(costs / iters), losses
 
 
@@ -442,6 +442,8 @@ val_ppls = []
 val_losses = []
 best_val_so_far = np.inf
 times = []
+patience = 0
+MAX_PATIENCE = 3
 
 # In debug mode, only run one epoch
 if args.debug:
@@ -466,18 +468,13 @@ for epoch in range(num_epochs):
 
     # SAVE MODEL IF IT'S THE BEST SO FAR
     if val_ppl < best_val_so_far:
+        patience = 0
         best_val_so_far = val_ppl
         if args.save_best:
             print("Saving model parameters to best_params.pt")
             torch.save(model.state_dict(), os.path.join(args.save_dir, 'best_params.pt'))
-        # NOTE ==============================================
-        # You will need to load these parameters into the same model
-        # for a couple Problems: so that you can compute the gradient
-        # of the loss w.r.t. hidden state as required in Problem 5.2
-        # and to sample from the the model as required in Problem 5.3
-        # We are not asking you to run on the test data, but if you
-        # want to look at test performance you would load the saved
-        # model and run on the test data with batch_size=1
+    else:
+        patience += 1
 
     # LOC RESULTS
     train_ppls.append(train_ppl)
@@ -493,6 +490,10 @@ for epoch in range(num_epochs):
     print(log_str)
     with open (os.path.join(args.save_dir, 'log.txt'), 'a') as f_:
         f_.write(log_str+ '\n')
+
+    if patience == MAX_PATIENCE:
+        print('Early stopping...')
+        break
 
 # SAVE LEARNING CURVES
 lc_path = os.path.join(args.save_dir, 'learning_curves.npy')
