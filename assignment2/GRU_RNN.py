@@ -117,6 +117,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
 
     self.dropout = nn.Dropout(1 - dp_keep_prob)
     self.softmax = nn.Softmax(dim=2)
+    self.gen_softmax = nn.Softmax(dim=1)
 
     # Weight initialization (Embedding has no bias)
     self.init_weights_uniform(self.embedding, init_bias=False)
@@ -207,7 +208,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
       logits.append(self.decode(h_previous_layer))
     return torch.stack(logits), h_next_ts
 
-  def generate(self, input, hidden, generated_seq_len): #generate next word using the GRU
+  def generate(self, input, hidden, generated_seq_len, device):  # generate next word using the GRU
     # Compute the forward pass, as in the self.forward method (above).
     # You'll probably want to copy substantial portions of that code here.
     #
@@ -232,14 +233,14 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
                     shape: (generated_seq_len, batch_size)
     """
     self.eval()
-
+    input = input[0]
     samples = []
     h_previous_ts = hidden
     new_input = input
 
     for t in range(generated_seq_len):
       h_next_ts = []
-      new_input = new_input.to(torch.device("cuda"))
+      new_input = new_input.to(device)
       embedding = self.embedding(new_input)
       input = embedding
       for h_index in range(self.num_layers):
@@ -247,17 +248,17 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
         h_recurrent = self.GRU_cells[h_index].forward(input, h_previous_ts[h_index])
         # Fully connected layer with dropout
         h_previous_layer = self.dropout(h_recurrent)
-        input = h_previous_layer # used vertically up the layers
+        input = h_previous_layer  # used vertically up the layers
         # Keep the ref for next ts
-        h_next_ts.append(h_recurrent) # used horizontally across timesteps
+        h_next_ts.append(h_recurrent)  # used horizontally across timesteps
 
       h_previous_ts = torch.stack(h_next_ts)
 
       sample = h_previous_layer
-      sample = self.softmax(self.decode(sample))
+      sample = self.gen_softmax(self.decode(sample))
       sample_index = int(np.argmax(sample.cpu().detach().numpy()))
       samples.append(sample_index)
-      new_input[0, 0] = sample_index
+      new_input[0] = sample_index
 
     return samples
 
