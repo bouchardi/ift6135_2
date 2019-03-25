@@ -167,7 +167,7 @@ def compute_average_grad(model, data, model_name):
         # Get the euclidian norm of the gradients with respect to each hidden layer
         grads = [float(torch.autograd.grad(loss, hidden, retain_graph=True)[0].norm(2).cpu().numpy()) for hidden in model.hiddens]
         # Return the result for the first and second hidden layer separately
-        return grads[0::2], grads[0::2]
+        return grads[0::2], grads[1::2]
 
 
 ###############################################################################
@@ -246,7 +246,9 @@ for model_class in model_classes:
 
     print(model_name)
     print('First layer: {}'.format(first_layer_grads))
+    print('Len first layer: {}'.format(len(first_layer_grads)))
     print('Second layer: {}'.format(second_layer_grads))
+    print('Len second layer: {}'.format(len(second_layer_grads)))
 
 
 #plt.plot(loss_array, '-o', label=model_name)
