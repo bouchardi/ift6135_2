@@ -112,6 +112,9 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     self.vocab_size = vocab_size
     self.num_layers = num_layers
 
+    # Keep hidden layers result when we want to compute the avg gradients
+    self.hiddens = []
+
     self.embedding = nn.Embedding(vocab_size, emb_size)
     self.decode = nn.Linear(hidden_size, vocab_size)
 
@@ -155,7 +158,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
     """
     return torch.zeros(self.num_layers, self.batch_size, self.hidden_size)
 
-  def forward(self, inputs, hidden):
+  def forward(self, inputs, hidden, keep_hiddens=False):
     # Compute the forward pass, using a nested python for loops.
     # The outer for loop should iterate over timesteps, and the
     # inner for loop should iterate over hidden layers of the stack.
@@ -190,6 +193,7 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
               if you are curious.
                     shape: (num_layers, batch_size, hidden_size)
     """
+    self.hiddens = []
     h_previous_ts = hidden
     logits = []
     embeddings = self.embedding(inputs)
@@ -199,6 +203,8 @@ class GRU(nn.Module): # Implement a stacked GRU RNN
       for h_index in range(self.num_layers):
         # Recurrent GRU cell
         h_recurrent = self.GRU_cells[h_index].forward(input, h_previous_ts[h_index])
+        if keep_hiddens:
+            self.hiddens.append(h_recurrent)
         # Fully connected layer with dropout
         h_previous_layer = self.dropout(h_recurrent)
         input = h_previous_layer # used vertically up the layers

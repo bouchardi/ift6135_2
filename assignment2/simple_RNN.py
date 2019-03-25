@@ -54,6 +54,9 @@ class RNN(nn.Module): # Implement a stacked vanilla RNN with Tanh nonlinearities
     self.batch_size = batch_size
     self.vocab_size = vocab_size
 
+    # To compute the average gradient
+    self.hiddens = []
+
     # Embedding encoder
     self.embedding = nn.Embedding(vocab_size, emb_size)
 
@@ -103,7 +106,7 @@ class RNN(nn.Module): # Implement a stacked vanilla RNN with Tanh nonlinearities
     """
     return torch.zeros(self.num_layers, self.batch_size, self.hidden_size)
 
-  def forward(self, inputs, hidden):
+  def forward(self, inputs, hidden, keep_hiddens=False):
     """
     Arguments:
         - inputs: A mini-batch of input sequences, composed of integers that
@@ -126,15 +129,17 @@ class RNN(nn.Module): # Implement a stacked vanilla RNN with Tanh nonlinearities
               if you are curious.
                     shape: (num_layers, batch_size, hidden_size)
     """
+    if keep_hiddens:
+        self.hiddens = []
     h_previous_ts = hidden
     seq_logits = []
     emb = self.embedding(inputs)
     for i in range(self.seq_len):
-        logits, h_previous_ts = self._forward_single_token_embedding(emb[i], h_previous_ts)
+        logits, h_previous_ts = self._forward_single_token_embedding(emb[i], h_previous_ts, keep_hiddens)
         seq_logits.append(logits)
     return torch.stack(seq_logits), h_previous_ts
 
-  def _forward_single_token_embedding(self, embedding, h_previous_ts):
+  def _forward_single_token_embedding(self, embedding, h_previous_ts, keep_hiddens=False):
     """
     Forward pass for a single token embedding given the
     hidden state at the previous time step
@@ -146,6 +151,8 @@ class RNN(nn.Module): # Implement a stacked vanilla RNN with Tanh nonlinearities
         a_W = self.linear_W[l](h_previous_layer)
         a_U = self.linear_U[l](h_previous_ts[l])
         h_recurrent = self.activation(a_U + a_W)
+        if keep_hiddens:
+            self.hiddens.append(h_recurrent)
         # Fully connected layer
         h_previous_layer = self.dropout(h_recurrent)
         # Keep the ref for next ts
