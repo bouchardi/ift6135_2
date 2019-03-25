@@ -5,6 +5,7 @@ import collections
 import torch
 
 from simple_RNN import RNN
+from GRU_RNN import GRU
 
 GENERATED_SEQ_LEN = 10
 FIRST_WORD = 'because'
