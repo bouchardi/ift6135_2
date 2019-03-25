@@ -1,0 +1,20 @@
+First word: receipts
+Generated Sequences: of the company 's <unk> division <eos> the company said it expects to post a loss of $ N million or N cents a share in the third quarter <eos> the company said it expects
+First word: new
+Generated Sequences: york city 's <unk> <unk> <eos> the new york stock exchange 's new york stock exchange composite trading yesterday the nasdaq composite index jumped N to N <eos> the nasdaq composite index closed N at
+First word: center
+Generated Sequences: in the u.s. and non-u.s. capital markets with terms of syndicate manager as compiled by dow jones capital markets report <eos> lockheed corp. $ N million of N N N notes due nov. N N
+First word: world
+Generated Sequences: 's largest <unk> <eos> the <unk> of the <unk> is <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>
+First word: river
+Generated Sequences: and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk>
+First word: rumors
+Generated Sequences: that the company 's ability to revive the <unk> of the company 's <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the
+First word: salary
+Generated Sequences: of the <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk>
+First word: sugar
+Generated Sequences: and the <unk> of the <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk>
+First word: taxable
+Generated Sequences: funds <eos> the company 's <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>
+First word: yesterday
+Generated Sequences: <eos> the company said it expects to report a loss of $ N million or N cents a share in the third quarter <eos> the company said it expects to report a loss of $

@@ -1,0 +1,20 @@
+First word: receipts
+Generated Sequences: of the company 's <unk> division <eos> the company said it expects to post a loss of $ N million or N cents a share in the third quarter <eos> the company said it expects to report a loss of $ N million or N cents a share <eos> the company said it expects to report a loss of $ N million or N cents a share <eos> the results
+First word: new
+Generated Sequences: york city 's <unk> <unk> <eos> the new york stock exchange 's new york stock exchange composite trading yesterday the nasdaq composite index jumped N to N <eos> the nasdaq composite index closed N at N <eos> volume totaled N million shares <eos> the nasdaq composite index jumped N to N <eos> the nasdaq composite index jumped N to N <eos> the nasdaq composite index jumped N to N <eos>
+First word: center
+Generated Sequences: in the u.s. and non-u.s. capital markets with terms of syndicate manager as compiled by dow jones capital markets report <eos> lockheed corp. $ N million of N N N notes due nov. N N priced at N to yield N N <eos> the noncallable issue was priced at a spread of N basis points above the treasury 's 10-year note <eos> rated single-a-3 by moody 's and single-a by
+First word: world
+Generated Sequences: 's largest <unk> <eos> the <unk> of the <unk> is <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <eos> <unk> gas corp. N million yen of N million shares due nov. N N priced at N N
+First word: river
+Generated Sequences: and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk>
+First word: rumors
+Generated Sequences: that the company 's ability to revive the <unk> of the company 's <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk>
+First word: salary
+Generated Sequences: of the <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the
+First word: sugar
+Generated Sequences: and the <unk> of the <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk> <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <eos> the <unk> <unk>
+First word: taxable
+Generated Sequences: funds <eos> the company 's <unk> <unk> <unk> <unk> <unk> and <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <eos> <unk> <unk> systems inc <eos> <unk> <unk> systems inc <eos> <unk> <unk> N N <eos> the charge on loans to depository institutions by the new york federal reserve bank <eos> call
+First word: yesterday
+Generated Sequences: <eos> the company said it expects to report a loss of $ N million or N cents a share in the third quarter <eos> the company said it expects to report a loss of $ N million or N cents a share in the third quarter <eos> the company said it expects to report a loss of $ N million or N cents a share in the third quarter <eos>
