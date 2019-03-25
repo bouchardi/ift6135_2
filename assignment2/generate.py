@@ -4,8 +4,7 @@ import numpy as np
 import collections
 import torch
 
-from simple_RNN import RNN
-from GRU_RNN import GRU
+from models import RNN, GRU
 
 GENERATED_SEQ_LEN = 10
 FIRST_WORD = 'because'

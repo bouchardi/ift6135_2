@@ -90,11 +90,8 @@ import torch.nn as nn
 import numpy
 np = numpy
 
-# NOTE ==============================================
-# This is where your models are imported
-from GRU_RNN import GRU
-from simple_RNN import RNN
-from attention import make_model as TRANSFORMER
+from models import GRU, RNN
+from models import make_model as TRANSFORMER
 
 
 ##############################################################################
